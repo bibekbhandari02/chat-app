@@ -1,4 +1,5 @@
 import path from "path";
+import { fileURLToPath } from "url";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -12,7 +13,9 @@ import { app, server } from "./socket/socket.js";
 
 dotenv.config();
 
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.join(__dirname, "..");
 // PORT should be assigned after calling dotenv.config() because we need to access the env variables. Didn't realize while recording the video. Sorry for the confusion.
 const PORT = process.env.PORT || 5000;
 
@@ -29,11 +32,11 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
 // Serve static files from frontend/dist in production
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.use(express.static(path.join(projectRoot, "frontend", "dist")));
 
 // Catch-all route - must be AFTER API routes
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+	res.sendFile(path.join(projectRoot, "frontend", "dist", "index.html"));
 });
 
 server.listen(PORT, () => {
