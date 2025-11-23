@@ -17,6 +17,10 @@ const useLogin = () => {
 				body: JSON.stringify({ username, password }),
 			});
 
+			if (!res.ok) {
+				throw new Error(`Server error: ${res.status}`);
+			}
+
 			const data = await res.json();
 			if (data.error) {
 				throw new Error(data.error);
@@ -25,7 +29,7 @@ const useLogin = () => {
 			localStorage.setItem("chat-user", JSON.stringify(data));
 			setAuthUser(data);
 		} catch (error) {
-			toast.error(error.message);
+			toast.error(error.message || "Login failed");
 		} finally {
 			setLoading(false);
 		}
