@@ -55,24 +55,5 @@ body {
 		transform: translate3d(4px, 0, 0);
 	}
 }
-/* Ensure proper alignment in the chat interface */
-.chat {
-    display: flex; /* Use flexbox for alignment */
-    margin: 10px 0; /* Space between messages */
-}
 
-.chat-end {
-    justify-content: flex-end; /* Align sent messages to the right */
-}
-
-.chat-start {
-    justify-content: flex-start; /* Align received messages to the left */
-}
-
-.chat-bubble {
-    max-width: 70%; /* Limit width of message bubble */
-    padding: 10px; /* Add padding to the bubble */
-    border-radius: 8px; /* Rounded corners for the bubble */
-    word-wrap: break-word; /* Wrap long words */
-}
 

@@ -6,8 +6,12 @@ const Message = ({ message }) => {
     const { authUser } = useAuthContext();
     const { selectedConversation } = useConversation();
     
+    // Safety check for authUser
+    if (!authUser) return null;
+    
     // Determine if the message is sent by the current user
-    const fromMe = message.senderId === authUser._id; 
+    // Convert both to strings to ensure proper comparison
+    const fromMe = String(message.senderId) === String(authUser._id);
     const formattedTime = extractTime(message.createdAt);
 
     // Define chat alignment class based on sender
@@ -15,8 +19,7 @@ const Message = ({ message }) => {
     const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
     
     // Background and text colors for sent and received messages
-    const bubbleBgColor = fromMe ? "bg-blue-500" : "bg-gray-300"; 
-    const textColor = fromMe ? "text-white" : "text-black"; 
+    const bubbleBgColor = fromMe ? "bg-blue-500" : ""; 
     const shakeClass = message.shouldShake ? "shake" : "";
 
     return (
@@ -26,7 +29,7 @@ const Message = ({ message }) => {
                     <img alt='User Avatar' src={profilePic} />
                 </div>
             </div>
-            <div className={`chat-bubble ${bubbleBgColor} ${textColor} ${shakeClass} pb-2`}>
+            <div className={`chat-bubble ${bubbleBgColor} ${shakeClass} pb-2`}>
                 {message.message}
             </div>
             <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>{formattedTime}</div>

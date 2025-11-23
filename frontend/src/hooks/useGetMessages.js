@@ -21,7 +21,17 @@ const useGetMessages = () => {
 			}
 		};
 
-		if (selectedConversation?._id) getMessages();
+		if (selectedConversation?._id) {
+			getMessages();
+		} else {
+			// Clear messages when no conversation is selected
+			setMessages([]);
+		}
+
+		// Cleanup: clear messages when component unmounts or conversation changes
+		return () => {
+			setMessages([]);
+		};
 	}, [selectedConversation?._id, setMessages]);
 
 	return { messages, loading };
