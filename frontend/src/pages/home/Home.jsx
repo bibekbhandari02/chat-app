@@ -15,14 +15,14 @@ const Home = () => {
 	}, [setSelectedConversation, setMessages]);
 
 	return (
-		<div className='flex h-[calc(100dvh-2rem)] sm:h-[450px] md:h-[550px] w-full sm:rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+		<div className='flex h-[calc(100dvh-1rem)] sm:h-[500px] md:h-[600px] lg:h-[700px] w-full max-w-7xl mx-auto sm:rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
 			{/* Sidebar - hidden on mobile when chat is selected */}
 			<div className={`${selectedConversation ? 'hidden sm:flex' : 'flex'} w-full sm:w-auto`}>
 				<Sidebar />
 			</div>
 			
 			{/* Message Container - hidden on mobile when no chat selected */}
-			<div className={`${selectedConversation ? 'flex' : 'hidden sm:flex'} w-full`}>
+			<div className={`${selectedConversation ? 'flex' : 'hidden sm:flex'} w-full sm:max-w-2xl`}>
 				<MessageContainer />
 			</div>
 		</div>

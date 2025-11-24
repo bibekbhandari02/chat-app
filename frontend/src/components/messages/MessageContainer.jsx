@@ -14,13 +14,13 @@ const MessageContainer = () => {
 	}, [setSelectedConversation]);
 
 	return (
-		<div className='w-full md:min-w-[450px] flex flex-col'>
+		<div className='w-full flex flex-col relative h-full'>
 			{!selectedConversation ? (
 				<NoChatSelected />
 			) : (
 				<>
-					{/* Header with back button for mobile */}
-					<div className='bg-slate-500 px-4 py-2 mb-2 flex items-center gap-2'>
+					{/* Header with back button for mobile - Fixed at top */}
+					<div className='bg-slate-500 px-4 py-3 flex items-center gap-2 flex-shrink-0'>
 						<button 
 							className='sm:hidden btn btn-sm btn-circle bg-white hover:bg-gray-200 text-gray-800 border-none'
 							onClick={() => setSelectedConversation(null)}
@@ -32,8 +32,16 @@ const MessageContainer = () => {
 							<span className='text-gray-900 font-bold'>{selectedConversation.fullName}</span>
 						</div>
 					</div>
-					<Messages />
-					<MessageInput />
+					
+					{/* Messages - Scrollable area with padding for input */}
+					<div className='flex-1 overflow-hidden'>
+						<Messages />
+					</div>
+					
+					{/* Message Input - Sticky at bottom */}
+					<div className='flex-shrink-0 border-t border-gray-600'>
+						<MessageInput />
+					</div>
 				</>
 			)}
 		</div>

@@ -15,7 +15,7 @@ const Messages = () => {
     }, [messages]);
 
     return (
-        <div className='px-4 flex-1 overflow-auto'>
+        <div className='px-4 py-3 h-full overflow-y-auto'>
             {loading && (
                 <div>
                     {[...Array(3)].map((_, idx) => (
@@ -25,7 +25,7 @@ const Messages = () => {
             )}
 
             {!loading && messages.length === 0 && (
-                <p className='text-center'>Send a message to start the conversation</p>
+                <p className='text-center text-gray-400'>Send a message to start the conversation</p>
             )}
 
             {!loading && messages.length > 0 && messages.map((message, index) => (
