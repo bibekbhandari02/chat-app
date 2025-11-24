@@ -22,7 +22,7 @@ const MessageContainer = () => {
 					{/* Header with back button for mobile */}
 					<div className='bg-slate-500 px-4 py-2 mb-2 flex items-center gap-2'>
 						<button 
-							className='sm:hidden btn btn-sm btn-circle'
+							className='sm:hidden btn btn-sm btn-circle bg-white hover:bg-gray-200 text-gray-800 border-none'
 							onClick={() => setSelectedConversation(null)}
 						>
 							←
