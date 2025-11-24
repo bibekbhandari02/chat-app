@@ -86,3 +86,22 @@ export const logout = (req, res) => {
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 };
+
+export const verify = async (req, res) => {
+	try {
+		// protectRoute middleware will handle token verification
+		// If we reach here, token is valid
+		res.status(200).json({ 
+			valid: true,
+			user: {
+				_id: req.user._id,
+				fullName: req.user.fullName,
+				username: req.user.username,
+				profilePic: req.user.profilePic,
+			}
+		});
+	} catch (error) {
+		console.log("Error in verify controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+};
